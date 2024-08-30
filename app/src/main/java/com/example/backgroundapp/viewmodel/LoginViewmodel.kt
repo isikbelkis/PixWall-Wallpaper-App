@@ -9,6 +9,7 @@ class LoginViewmodel : ViewModel() {
 
     private lateinit var auth: FirebaseAuth
 
+
     private val loginResult = MutableLiveData<Boolean>()
     val loginResultLiveData: LiveData<Boolean> get() = loginResult
 

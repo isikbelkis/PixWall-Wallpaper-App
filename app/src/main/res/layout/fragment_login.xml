@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".LoginFragment">
+    tools:context=".view.LoginFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -107,7 +107,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="170dp"
+                android:layout_marginTop="140dp"
                 android:background="@drawable/gradient_edittext_background">
 
                 <androidx.appcompat.widget.AppCompatButton

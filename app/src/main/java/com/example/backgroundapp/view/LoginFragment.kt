@@ -1,4 +1,4 @@
-package com.example.backgroundapp
+package com.example.backgroundapp.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

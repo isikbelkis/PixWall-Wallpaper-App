@@ -1,4 +1,4 @@
-package com.example.backgroundapp
+package com.example.backgroundapp.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -28,7 +28,7 @@ class SignupFragment : Fragment() {
 
         signupViewModel.signupResultLiveData.observe(viewLifecycleOwner){ success ->
             if (success) {
-                val action=SignupFragmentDirections.actionSignupFragmentToHomePageFragment()
+                val action=SignupFragmentDirections.actionSignupFragmentToCategoryFragment()
                 findNavController().navigate(action)
             }
         }
