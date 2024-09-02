@@ -5,16 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.backgroundapp.R
 import com.example.backgroundapp.adapter.CategoryAdapter
 import com.example.backgroundapp.databinding.FragmentCategoryBinding
 import com.example.backgroundapp.model.Category
+import com.example.backgroundapp.viewmodel.CategoryViewmodel
 
 class CategoryFragment : Fragment() {
     private lateinit var binding: FragmentCategoryBinding
     private lateinit var adapter:CategoryAdapter
+    private lateinit var categoryViewmodel: CategoryViewmodel
     private val selectedCategories = mutableListOf<Category>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,7 +25,13 @@ class CategoryFragment : Fragment() {
     ): View? {
         binding = FragmentCategoryBinding.inflate(inflater, container, false)
 
+        categoryViewmodel = ViewModelProvider(this).get(CategoryViewmodel::class.java)
+
         binding.buttonContinue.setOnClickListener {
+            
+            selectedCategories.forEach { category ->
+                categoryViewmodel.addCategory(category)
+            }
             val action=CategoryFragmentDirections.actionCategoryFragmentToHomePageFragment()
             findNavController().navigate(action)
         }

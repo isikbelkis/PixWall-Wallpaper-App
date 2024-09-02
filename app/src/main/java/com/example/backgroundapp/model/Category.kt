@@ -1,7 +1,11 @@
 package com.example.backgroundapp.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity (tableName = "Categories")
 data class Category(
-    val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val name: String,
     val imageResId: Int,
     var isSelected: Boolean = false)

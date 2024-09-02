@@ -111,6 +111,7 @@
                 android:background="@drawable/gradient_edittext_background">
 
                 <androidx.appcompat.widget.AppCompatButton
+
                     android:id="@+id/buttonSignup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
