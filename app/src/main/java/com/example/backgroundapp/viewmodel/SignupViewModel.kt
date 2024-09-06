@@ -1,23 +1,21 @@
 package com.example.backgroundapp.viewmodel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 
-class SignupViewmodel : ViewModel() {
-
-    private lateinit var auth: FirebaseAuth
+class SignupViewModel(
+    application: Application,
+    private val auth: FirebaseAuth
+) : AndroidViewModel(application) {
 
     private val signupResult = MutableLiveData<Boolean>()
     val signupResultLiveData: LiveData<Boolean> get() = signupResult
 
     private val errorMessage = MutableLiveData<String>()
     val errorMessageLiveData: LiveData<String> get() = errorMessage
-
-    init {
-        auth = FirebaseAuth.getInstance()
-    }
 
     fun signUp(email: String, password: String) {
         if (email.isEmpty() || password.isEmpty()) {

@@ -8,4 +8,6 @@ data class Category(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val name: String,
     val imageResId: Int,
-    var isSelected: Boolean = false)
+    var isSelected: Boolean = false,
+    val queryParam: String
+)

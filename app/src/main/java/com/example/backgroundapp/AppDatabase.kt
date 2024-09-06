@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.backgroundapp.model.Category
 
-@Database(entities = [Category::class], version = 1, exportSchema = true)
+@Database(entities = [Category::class], version = 2, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun categoryDao(): CategoryDao
 

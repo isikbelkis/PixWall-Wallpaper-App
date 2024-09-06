@@ -9,11 +9,12 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.backgroundapp.databinding.FragmentLoginBinding
-import com.example.backgroundapp.viewmodel.LoginViewmodel
+import com.example.backgroundapp.viewmodel.LoginViewModel
+import org.koin.android.ext.android.inject
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
-    private val loginViewmodel:LoginViewmodel by viewModels()
+    private val loginViewmodel:LoginViewModel by inject()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,7 +33,7 @@ class LoginFragment : Fragment() {
 
         loginViewmodel.loginResultLiveData.observe(viewLifecycleOwner){succes->
             if (succes){
-                val action=LoginFragmentDirections.actionLoginFragmentToHomePageFragment()
+                val action=LoginFragmentDirections.actionLoginFragmentToBattomNavActivity()
                 findNavController().navigate(action)
             }
         }

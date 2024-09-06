@@ -9,11 +9,12 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.backgroundapp.databinding.FragmentSignupBinding
-import com.example.backgroundapp.viewmodel.SignupViewmodel
+import com.example.backgroundapp.viewmodel.SignupViewModel
+import org.koin.android.ext.android.inject
 
 class SignupFragment : Fragment() {
     private lateinit var binding: FragmentSignupBinding
-    private val signupViewModel: SignupViewmodel by viewModels()
+    private val signupViewModel: SignupViewModel by inject()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

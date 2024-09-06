@@ -23,8 +23,8 @@
             android:id="@+id/action_loginFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_homePageFragment"
-            app:destination="@id/homePageFragment" />
+            android:id="@+id/action_loginFragment_to_battomNavActivity"
+            app:destination="@id/battomNavActivity" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -34,19 +34,21 @@
         <action
             android:id="@+id/action_signupFragment_to_categoryFragment"
             app:destination="@id/categoryFragment" />
+        <action
+            android:id="@+id/action_signupFragment_self"
+            app:destination="@id/signupFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/homePageFragment"
-        android:name="com.example.backgroundapp.view.HomePageFragment"
-        android:label="fragment_home_page"
-        tools:layout="@layout/fragment_home_page" />
     <fragment
         android:id="@+id/categoryFragment"
         android:name="com.example.backgroundapp.view.CategoryFragment"
         android:label="fragment_category"
         tools:layout="@layout/fragment_category" >
         <action
-            android:id="@+id/action_categoryFragment_to_homePageFragment"
-            app:destination="@id/homePageFragment" />
+            android:id="@+id/action_categoryFragment_to_battomNavActivity"
+            app:destination="@id/battomNavActivity" />
     </fragment>
+    <activity
+        android:id="@+id/battomNavActivity"
+        android:name="com.example.backgroundapp.BattomNavActivity"
+        android:label="BattomNavActivity" />
 </navigation>

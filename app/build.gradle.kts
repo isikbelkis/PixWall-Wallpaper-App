@@ -47,6 +47,15 @@ dependencies {
     implementation ("com.google.firebase:firebase-firestore-ktx:24.3.0")
     implementation("com.google.firebase:firebase-auth")
 
+    implementation ("com.squareup.okhttp3:okhttp:5.0.0-alpha.11")
+    implementation ("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11")
+
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    implementation("io.insert-koin:koin-core:3.4.0")
+    implementation ("io.insert-koin:koin-android:3.4.0")
+    implementation ("io.insert-koin:koin-androidx-navigation:3.4.0")
+
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.2")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.2")
 
