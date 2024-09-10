@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_download"
+        android:title="Download"
+        android:icon="@drawable/download"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/setHomeWallpaper"
+        android:title="Set to home screen"
+        android:icon="@drawable/home_screen"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/setLockWallpaper"
+        android:title="Set to lock screen"
+        android:icon="@drawable/screen_lock"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/setLockHomeWallpaper"
+        android:title="Set to home and lock screens"
+        app:showAsAction="never"/>
+
+</menu>
