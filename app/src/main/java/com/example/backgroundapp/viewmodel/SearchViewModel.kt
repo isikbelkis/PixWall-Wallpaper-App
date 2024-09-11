@@ -19,22 +19,30 @@ class SearchViewModel(
     private val searchResults = MutableLiveData<List<PhotoItem>>()
     val searchResultsLiveData: LiveData<List<PhotoItem>> get() = searchResults
 
+    private val searchQuery = MutableLiveData<String>()
+    val searchQueryLiveData: LiveData<String> get() = searchQuery
+
     fun searchPhotos(query: String) {
         viewModelScope.launch {
             if (query.isNotEmpty()) {
-                val response = unsplashService.searchPhotos(
-                    keyword = query,
-                    apiKey = Constants.API_KEY,
-                    page = 1,
-                    perPage = 30
-                )
-                if (response.isSuccessful) {
-                    response.body()?.results?.let { photos ->
-                        searchResults.postValue(photos)
+                try {
+                    val response = unsplashService.searchPhotos(
+                        keyword = query,
+                        apiKey = Constants.API_KEY,
+                        page = 1,
+                        perPage = 30
+                    )
+                    if (response.isSuccessful) {
+                        response.body()?.results?.let { photos ->
+                            searchResults.postValue(photos)
+                        } ?: searchResults.postValue(emptyList())
+                    } else {
+                        searchResults.postValue(emptyList())
                     }
-                } else {
+                } catch (e: Exception) {
                     searchResults.postValue(emptyList())
                 }
+                searchQuery.postValue(query)
             }
         }
     }

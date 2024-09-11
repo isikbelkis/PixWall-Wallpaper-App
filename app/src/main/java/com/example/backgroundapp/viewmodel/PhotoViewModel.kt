@@ -1,7 +1,6 @@
 package com.example.backgroundapp.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -31,43 +30,38 @@ class PhotoViewModel(
         val categoriesRef = firestore.collection("users").document(userId).collection("categories")
 
         viewModelScope.launch {
-                val documents = categoriesRef.get().await()
-                val selectedCategories = documents.mapNotNull { document ->
-                    val name = document.getString("name")
-                    val id = document.getLong("id")?.toInt()
-                    val drawableRes = R.drawable.ic_launcher_background
-                    if (name != null && id != null) {
-                        Category(id, name, drawableRes, queryParam = name)
-                    } else {
-                        null
-                    }
-                }.take(3)
+            val documents = categoriesRef.get().await()
+            val selectedCategories = documents.mapNotNull { document ->
+                val name = document.getString("name")
+                val id = document.getLong("id")?.toInt()
+                val drawableRes = R.drawable.ic_launcher_background
+                if (name != null && id != null) {
+                    Category(id, name, drawableRes, queryParam = name)
+                } else {
+                    null
+                }
+            }.take(3)
 
-                fetchPhotosForSelectedCategories(selectedCategories)
-            }
+            fetchPhotosForSelectedCategories(selectedCategories)
         }
+    }
 
     private suspend fun fetchPhotosForSelectedCategories(selectedCategories: List<Category>) {
         val allPhotos = mutableListOf<PhotoItem>()
 
         selectedCategories.forEach { category ->
-                val response = unsplashService.categoryPhotos(
-                    category = category.queryParam,
-                    apiKey = Constants.API_KEY,
-                    page = 1,
-                    perPage = 30
-                )
-                if (response.isSuccessful) {
-                    response.body()?.results?.let { photos ->
-                        allPhotos.addAll(photos)
-                    }
-                } else {
-                    Log.e("API_ERROR", "Error fetching photos for ${category.name}: ${response.errorBody()}")
+            val response = unsplashService.categoryPhotos(
+                category = category.queryParam,
+                apiKey = Constants.API_KEY,
+                page = 1,
+                perPage = 30
+            )
+            if (response.isSuccessful) {
+                response.body()?.results?.let { photos ->
+                    allPhotos.addAll(photos)
                 }
             }
+        }
         _photosLiveData.postValue(allPhotos)
     }
 }
-
-
-

@@ -15,10 +15,10 @@ class IntroFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding=FragmentIntroBinding.inflate(inflater, container, false)
+        binding = FragmentIntroBinding.inflate(inflater, container, false)
 
         binding.buttonStart.setOnClickListener {
-            val action=IntroFragmentDirections.actionIntroFragmentToLoginFragment()
+            val action = IntroFragmentDirections.actionIntroFragmentToLoginFragment()
             findNavController().navigate(action)
         }
         return binding.root

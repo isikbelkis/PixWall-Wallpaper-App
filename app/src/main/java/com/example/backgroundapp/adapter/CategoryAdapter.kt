@@ -15,18 +15,21 @@ class CategoryAdapter(
     inner class CategoryViewHolder(private val binding: CategoryCardviewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(category: Category) {
-            binding.textCategoryName.text = category.name
-            binding.imageCategory.setImageResource(category.imageResId)
+            with(binding) {
+                textCategoryName.text = category.name
+                imageCategory.setImageResource(category.imageResId)
 
-            val cardView: CardView = binding.cardView
-            cardView.setCardBackgroundColor(
-                if (category.isSelected) Color.GREEN else Color.WHITE
-            )
-            binding.root.setOnClickListener {
-                onCategorySelected(category)
+                val cardView: CardView = cardView
+                cardView.setCardBackgroundColor(
+                    if (category.isSelected) Color.GREEN else Color.WHITE
+                )
+                root.setOnClickListener {
+                    onCategorySelected(category)
+                }
             }
         }
     }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

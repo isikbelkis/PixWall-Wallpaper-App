@@ -22,6 +22,7 @@
     <item
         android:id="@+id/setLockHomeWallpaper"
         android:title="Set to home and lock screens"
+        android:icon="@drawable/mobile_screen_share"
         app:showAsAction="never"/>
 
 </menu>

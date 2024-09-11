@@ -4,6 +4,7 @@ import com.example.backgroundapp.model.PhotoItem
 import com.example.backgroundapp.model.SearchResponse
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface UnsplashService {
@@ -28,4 +29,9 @@ interface UnsplashService {
         @Query("page") page: Int,
         @Query("per_page") perPage: Int
     ): Response<SearchResponse>
+
+    @GET("photos/{id}")
+    suspend fun getImageDetail(
+        @Path("id") id: String
+    ): Response<PhotoItem>
 }

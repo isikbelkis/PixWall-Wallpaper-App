@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.backgroundapp.adapter.PhotoAdapter
 import com.example.backgroundapp.databinding.FragmentHomePageBinding
@@ -28,12 +29,14 @@ class HomePageFragment : Fragment() {
         binding.recylerView.layoutManager = layoutManager
 
         viewModel.photosLiveData.observe(viewLifecycleOwner) { photos ->
-            adapter = PhotoAdapter(photos, onClick = { photoItem ->
-                Toast.makeText(context, "Fotoğraf tıklandı: ${photoItem.id}", Toast.LENGTH_SHORT).show()
-            })
-            binding.recylerView.adapter=adapter
+            adapter = PhotoAdapter(photos,
+                onClick = { photo ->
+                    val action =
+                        HomePageFragmentDirections.actionHomePageFragment2ToDetailFragment2(id = photo.id!!)
+                    findNavController().navigate(action)
+                })
+            binding.recylerView.adapter = adapter
         }
-
         viewModel.loadCategoriesAndFetchPhotos()
 
         return binding.root

@@ -12,31 +12,29 @@
         android:layout_height="match_parent"
         android:background="@drawable/home_gradient_background">
 
-        <EditText
-            android:id="@+id/searchEdit"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="15dp"
-            android:background="@drawable/search_background"
-            android:drawableEnd="@drawable/search"
-            android:drawableTint="@color/white"
-            android:hint="Search image.."
-            android:padding="8dp"
-            android:textColor="@color/black"
-            android:textSize="20sp"
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen20"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:iconifiedByDefault="false"
+            app:searchHintIcon="@null"
+            app:queryHint="@string/search"
+            android:focusable="false"
+            app:closeIcon="@drawable/search"
+            android:background="@drawable/search_background"/>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/searchRecycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="@dimen/dimen12"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchEdit" />
+            app:layout_constraintTop_toBottomOf="@+id/search" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

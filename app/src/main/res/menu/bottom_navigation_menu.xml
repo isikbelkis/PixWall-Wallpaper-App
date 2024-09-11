@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/nav_home"
         android:title="Home"
+        app:cnb_backgroundColor="@color/green"
+        app:cnb_iconColor="@color/white"
+        android:name="com.example.backgroundapp.view.HomePageFragment"
         android:icon="@drawable/baseline_home_24" />
     <item
         android:id="@+id/nav_search"
         android:title="Search"
+        android:name="com.example.backgroundapp.view.SearchFragment"
+        app:cnb_backgroundColor="@color/green"
         android:icon="@drawable/search" />
     <item
         android:id="@+id/nav_profile"
         android:title="Profile"
+        app:cnb_backgroundColor="@color/green"
+        android:name="com.example.backgroundapp.view.ProfileFragment"
         android:icon="@drawable/profile" />
 </menu>

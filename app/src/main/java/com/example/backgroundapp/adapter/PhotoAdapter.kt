@@ -5,33 +5,51 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.backgroundapp.R
+import com.example.backgroundapp.databinding.WallpaperCardviewBinding
 import com.example.backgroundapp.model.PhotoItem
+import com.example.backgroundapp.util.loadCircleImage
+import com.example.backgroundapp.util.loadImage
 
 class PhotoAdapter(
     private var photos: List<PhotoItem>,
     private val onClick: (PhotoItem) -> Unit
 ) : RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder>() {
 
-    inner class PhotoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val imageView: ImageView = itemView.findViewById(R.id.imageView3)
-
+    inner class PhotoViewHolder(private val binding: WallpaperCardviewBinding) :
+        ViewHolder(binding.root) {
         fun bind(photoItem: PhotoItem) {
-            val url = photoItem.urls?.regular ?: photoItem.urls?.regular
-            Glide.with(itemView.context)
-                .load(url)
-                .into(imageView)
+            with(binding) {
+                val url = photoItem.urls?.full ?: photoItem.urls?.regular
+                url?.let {
+                    photoImageView.loadImage(it)
+                }
 
-            itemView.setOnClickListener {
-                onClick(photoItem)
+                val profileImage =
+                    photoItem.user?.profileImage?.small
+                profileImage?.let {
+                    profileImageView.loadCircleImage(it)
+                }
+
+                usernameTextView.text =
+                    "${photoItem.user?.name ?: ""} ${photoItem.user?.lastName ?: ""}"
+
+                itemView.setOnClickListener {
+                    onClick(photoItem)
+                }
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.wallpaper_cardview, parent, false)
-        return PhotoViewHolder(view)
+        val binding = WallpaperCardviewBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return PhotoViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
@@ -42,5 +60,6 @@ class PhotoAdapter(
 
     fun updatePhotos(newPhotos: List<PhotoItem>) {
         photos = newPhotos
+        notifyDataSetChanged()
     }
 }

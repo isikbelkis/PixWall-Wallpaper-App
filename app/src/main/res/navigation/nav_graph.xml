@@ -9,7 +9,7 @@
         android:id="@+id/introFragment"
         android:name="com.example.backgroundapp.view.IntroFragment"
         android:label="fragment_intro"
-        tools:layout="@layout/fragment_intro" >
+        tools:layout="@layout/fragment_intro">
         <action
             android:id="@+id/action_introFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -18,10 +18,11 @@
         android:id="@+id/loginFragment"
         android:name="com.example.backgroundapp.view.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
+
         <action
             android:id="@+id/action_loginFragment_to_battomNavActivity"
             app:destination="@id/battomNavActivity" />
@@ -30,25 +31,24 @@
         android:id="@+id/signupFragment"
         android:name="com.example.backgroundapp.view.SignupFragment"
         android:label="fragment_signup"
-        tools:layout="@layout/fragment_signup" >
+        tools:layout="@layout/fragment_signup">
         <action
             android:id="@+id/action_signupFragment_to_categoryFragment"
             app:destination="@id/categoryFragment" />
-        <action
-            android:id="@+id/action_signupFragment_self"
-            app:destination="@id/signupFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
         android:name="com.example.backgroundapp.view.CategoryFragment"
         android:label="fragment_category"
-        tools:layout="@layout/fragment_category" >
+        tools:layout="@layout/fragment_category">
+
         <action
             android:id="@+id/action_categoryFragment_to_battomNavActivity"
             app:destination="@id/battomNavActivity" />
     </fragment>
     <activity
         android:id="@+id/battomNavActivity"
-        android:name="com.example.backgroundapp.BattomNavActivity"
+        android:name="com.example.backgroundapp.view.BottomNavActivity"
         android:label="BattomNavActivity" />
 </navigation>

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.backgroundapp.R
@@ -35,31 +36,93 @@ class CategoryFragment : Fragment() {
         }
 
         val categories = listOf(
-            Category(id = 1, name = "Animals", imageResId = R.drawable.animals, queryParam = "animals"),
-            Category(id = 2, name = "Film", imageResId = R.drawable.film, queryParam = "film"),
-            Category(id = 3, name = "Nature", imageResId = R.drawable.nature, queryParam = "nature"),
-            Category(id = 4, name = "Travel", imageResId = R.drawable.travel, queryParam = "travel"),
-            Category(id = 5, name = "People", imageResId = R.drawable.people, queryParam = "people"),
-            Category(id = 6, name = "Architecture", imageResId = R.drawable.architecture_interiors, queryParam = "architecture_interiors"),
-            Category(id = 7, name = "Food & Drink", imageResId = R.drawable.food_drink, queryParam = "food_drink"),
-            Category(id = 8, name = "Textures Patterns", imageResId = R.drawable.textures_patterns, queryParam = "textures_patterns"),
-            Category(id = 9, name = "Experimental", imageResId = R.drawable.experimental, queryParam = "experimental"),
-            Category(id = 10, name = "Photography", imageResId = R.drawable.streeth_photography, queryParam = "streeth_photography"),
-            Category(id = 11, name = "Sports", imageResId = R.drawable.sports, queryParam = "sports"),
-            Category(id = 12, name = "3D", imageResId = R.drawable.dddd, queryParam = "3d")
+            Category(
+                id = 1,
+                name = getString(R.string.animals),
+                imageResId = R.drawable.animals,
+                queryParam = "animals"
+            ),
+            Category(
+                id = 2,
+                name = getString(R.string.film),
+                imageResId = R.drawable.film,
+                queryParam = "film"
+            ),
+            Category(
+                id = 3,
+                name = getString(R.string.nature),
+                imageResId = R.drawable.nature,
+                queryParam = "nature"
+            ),
+            Category(
+                id = 4,
+                name = getString(R.string.travel),
+                imageResId = R.drawable.travel,
+                queryParam = "travel"
+            ),
+            Category(
+                id = 5,
+                name = getString(R.string.people),
+                imageResId = R.drawable.people,
+                queryParam = "people"
+            ),
+            Category(
+                id = 6,
+                name = getString(R.string.architecture),
+                imageResId = R.drawable.architecture_interiors,
+                queryParam = "architecture_interiors"
+            ),
+            Category(
+                id = 7,
+                name = getString(R.string.food_drink),
+                imageResId = R.drawable.food_drink,
+                queryParam = "food_drink"
+            ),
+            Category(
+                id = 8,
+                name = getString(R.string.textures_patterns),
+                imageResId = R.drawable.textures_patterns,
+                queryParam = "textures_patterns"
+            ),
+            Category(
+                id = 9,
+                name = getString(R.string.experimental),
+                imageResId = R.drawable.experimental,
+                queryParam = "experimental"
+            ),
+            Category(
+                id = 10,
+                name = getString(R.string.photography),
+                imageResId = R.drawable.streeth_photography,
+                queryParam = "streeth_photography"
+            ),
+            Category(
+                id = 11,
+                name = getString(R.string.sports),
+                imageResId = R.drawable.sports,
+                queryParam = "sports"
+            ),
+            Category(
+                id = 12,
+                name = getString(R.string.d),
+                imageResId = R.drawable.dddd,
+                queryParam = "3d"
+            )
         )
 
         adapter = CategoryAdapter(categories) { category ->
-            category.isSelected = !category.isSelected
             if (category.isSelected) {
+                category.isSelected = false
+                selectedCategories.remove(category)
+            } else {
                 if (selectedCategories.size < 3) {
+                    category.isSelected = true
                     selectedCategories.add(category)
                 } else {
-                    category.isSelected = false
+                    Toast.makeText(requireContext(), getString(R.string.categories3), Toast.LENGTH_SHORT).show()
                 }
-            } else {
-                selectedCategories.remove(category)
             }
+            adapter.notifyItemChanged(categories.indexOf(category))
         }
 
         binding.recyclerView.apply {

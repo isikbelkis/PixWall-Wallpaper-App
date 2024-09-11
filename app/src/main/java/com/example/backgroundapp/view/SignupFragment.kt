@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.backgroundapp.databinding.FragmentSignupBinding
 import com.example.backgroundapp.viewmodel.SignupViewModel
@@ -21,15 +20,20 @@ class SignupFragment : Fragment() {
     ): View? {
         binding = FragmentSignupBinding.inflate(inflater, container, false)
 
-        binding.buttonSignup.setOnClickListener {
-            val email = binding.editTextEmail.text.toString()
-            val password = binding.editTextPassword.text.toString()
-            signupViewModel.signUp(email, password)
+        with(binding) {
+            buttonSignup.setOnClickListener {
+                val firstName = editTextName.text.toString()
+                val lastName = editTextLastName.text.toString()
+                val userName = editTextUserName.text.toString()
+                val email = editTextEmail.text.toString()
+                val password = editTextPassword.text.toString()
+                signupViewModel.signUp(firstName, lastName, userName, email, password)
+            }
         }
 
-        signupViewModel.signupResultLiveData.observe(viewLifecycleOwner){ success ->
+        signupViewModel.signupResultLiveData.observe(viewLifecycleOwner) { success ->
             if (success) {
-                val action=SignupFragmentDirections.actionSignupFragmentToCategoryFragment()
+                val action = SignupFragmentDirections.actionSignupFragmentToCategoryFragment()
                 findNavController().navigate(action)
             }
         }

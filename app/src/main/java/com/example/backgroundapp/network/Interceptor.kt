@@ -12,8 +12,7 @@ class Interceptor : Interceptor {
         val request = originalRequest.newBuilder()
             .header("Authorization", "Client-ID $token")
             .build()
-        val response = chain.proceed(request)
 
-        return response
+        return chain.proceed(request)
     }
 }
