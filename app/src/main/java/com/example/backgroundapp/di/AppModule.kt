@@ -1,6 +1,5 @@
 package com.example.backgroundapp.di
 
-import com.example.backgroundapp.AppDatabase
 import com.example.backgroundapp.network.Interceptor
 import com.example.backgroundapp.network.UnsplashService
 import com.example.backgroundapp.util.Constants
@@ -23,9 +22,6 @@ val appModule= module {
 
     single { FirebaseAuth.getInstance() }
 
-    single { AppDatabase.getDatabase(get()) }
-
-    single { get<AppDatabase>().categoryDao() }
 
     single {
         Retrofit.Builder()

@@ -28,7 +28,7 @@ class BattomNavActivity : AppCompatActivity() {
 
         navView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_home -> navController.navigate(R.id.homePageFragment)
+                R.id.nav_home -> navController.navigate(R.id.hom)
                 R.id.nav_search -> navController.navigate(R.id.searchFragment)
                 R.id.nav_profile -> navController.navigate(R.id.profileFragment)
             }
