@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.backgroundapp.adapter.PhotoAdapter
@@ -22,11 +22,15 @@ class HomePageFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHomePageBinding.inflate(inflater, container, false)
 
         val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         binding.recylerView.layoutManager = layoutManager
+
+        viewModel.isLoading.observe(viewLifecycleOwner) { loading ->
+            binding.progressBar.isVisible = loading
+        }
 
         viewModel.photosLiveData.observe(viewLifecycleOwner) { photos ->
             adapter = PhotoAdapter(photos,
@@ -38,6 +42,7 @@ class HomePageFragment : Fragment() {
             binding.recylerView.adapter = adapter
         }
         viewModel.loadCategoriesAndFetchPhotos()
+
 
         return binding.root
     }

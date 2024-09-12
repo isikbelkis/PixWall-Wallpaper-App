@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.backgroundapp.R
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginViewModel(
@@ -11,22 +12,24 @@ class LoginViewModel(
     private val auth: FirebaseAuth
 ) : AndroidViewModel(application) {
 
-    private val loginResult = MutableLiveData<Boolean>()
-    val loginResultLiveData: LiveData<Boolean> get() = loginResult
+    private val _loginResult = MutableLiveData<Boolean>()
+    val loginResultLiveData: LiveData<Boolean> get() = _loginResult
 
-    private val errorMessage = MutableLiveData<String>()
-    val errorMessageLiveData: LiveData<String> get() = errorMessage
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessageLiveData: LiveData<String> get() = _errorMessage
+
+    private val context = getApplication<Application>().applicationContext
 
     fun login(email: String, password: String) {
         if (email.isEmpty() || password.isEmpty()) {
-            errorMessage.value = "Please fill in all fields."
+            _errorMessage.value = context.getString(R.string.error_empty_fields)
         } else {
             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    loginResult.value = true
+                    _loginResult.value = true
                 } else {
-                    loginResult.value = false
-                    errorMessage.value = task.exception?.message ?: "Login Failed."
+                    _loginResult.value = false
+                    _errorMessage.value = task.exception?.message ?: context.getString(R.string.error_login_failed)
                 }
             }
         }

@@ -3,6 +3,7 @@ package com.example.backgroundapp.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -39,6 +40,9 @@ class PhotoAdapter(
                 itemView.setOnClickListener {
                     onClick(photoItem)
                 }
+
+                val fadeInAnimation = AnimationUtils.loadAnimation(itemView.context, R.anim.fade_in)
+                itemView.startAnimation(fadeInAnimation)
             }
         }
     }

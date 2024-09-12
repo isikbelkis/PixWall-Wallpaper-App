@@ -4,6 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.backgroundapp.R
+import com.example.backgroundapp.util.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -13,11 +15,13 @@ class SignupViewModel(
     private val firestore: FirebaseFirestore
 ) : AndroidViewModel(application) {
 
-    private val signupResult = MutableLiveData<Boolean>()
-    val signupResultLiveData: LiveData<Boolean> get() = signupResult
+    private val _signupResult = MutableLiveData<Boolean>()
+    val signupResultLiveData: LiveData<Boolean> get() = _signupResult
 
-    private val errorMessage = MutableLiveData<String>()
-    val errorMessageLiveData: LiveData<String> get() = errorMessage
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessageLiveData: LiveData<String> get() = _errorMessage
+
+    private val context = getApplication<Application>().applicationContext
 
     fun signUp(
         firstName: String,
@@ -25,39 +29,53 @@ class SignupViewModel(
         username: String,
         email: String,
         password: String,
-    ){
-        if (email.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || username.isEmpty()) {
-            errorMessage.value = "Please fill in all fields."
-        } else if (!isValidEmail(email)) {
-            errorMessage.value = "Invalid email format."
-        } else {
-            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val userId = auth.currentUser?.uid
-                    val user = hashMapOf(
-                        "firstName" to firstName,
-                        "lastName" to lastName,
-                        "username" to username,
-                        "email" to email
-                    )
+    ) {
+        when {
+            email.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || username.isEmpty() -> {
+                _errorMessage.value = context.getString(R.string.error_empty_fields)
+            }
 
-                    if (userId != null) {
-                        firestore.collection("users").document(userId)
-                            .set(user)
-                            .addOnSuccessListener {
-                                signupResult.value = true
+            !isValidEmail(email) -> {
+                _errorMessage.value = context.getString(R.string.error_invalid_email)
+            }
+
+            else -> {
+                auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            val userId = auth.currentUser?.uid
+                            val user = hashMapOf(
+                                Constants.FIRSTNAME to firstName,
+                                Constants.LASTNAME to lastName,
+                                Constants.USERNAME to username,
+                                Constants.EMAIL to email
+                            )
+
+                            userId?.let {
+                                firestore.collection(Constants.USERS).document(it)
+                                    .set(user)
+                                    .addOnSuccessListener {
+                                        _signupResult.value = true
+                                    }
+                                    .addOnFailureListener { e ->
+                                        _errorMessage.value = context.getString(
+                                            R.string.error_saving_user_info,
+                                            e.localizedMessage
+                                        )
+                                    }
                             }
-                            .addOnFailureListener {
-                                errorMessage.value = "Error saving user information"
-                            }
+                        } else {
+                            _errorMessage.value = context.getString(
+                                R.string.error_registration_failed,
+                                task.exception?.message
+                            )
+                        }
                     }
-                } else {
-                    errorMessage.value = task.exception?.message ?: "Registration Failed"
-                }
             }
         }
     }
-    fun isValidEmail(email: String): Boolean {
+
+    private fun isValidEmail(email: String): Boolean {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 }

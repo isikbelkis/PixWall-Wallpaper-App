@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import com.example.backgroundapp.R
 import com.example.backgroundapp.databinding.FragmentDetailBinding
@@ -78,6 +79,15 @@ class DetailFragment : Fragment() {
             detailViewModel.isPhotoSavedLiveData.observe(viewLifecycleOwner) { isSaved ->
                 setButtonSavedState(isSaved)
             }
+
+            detailViewModel.isLoading.observe(viewLifecycleOwner) { loading ->
+                progressBar.isVisible = loading
+            }
+            detailViewModel.errorMessageLiveData.observe(viewLifecycleOwner) { errorMessage ->
+                errorMessage?.let {
+                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
@@ -136,6 +146,7 @@ class DetailFragment : Fragment() {
                     bottomSheetDialog.dismiss()
                     true
                 }
+
                 else -> false
             }
         }

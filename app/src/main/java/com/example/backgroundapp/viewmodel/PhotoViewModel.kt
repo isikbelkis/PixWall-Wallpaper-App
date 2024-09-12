@@ -24,25 +24,32 @@ class PhotoViewModel(
 
     private val _photosLiveData = MutableLiveData<List<PhotoItem>>()
     val photosLiveData: LiveData<List<PhotoItem>> get() = _photosLiveData
+    val isLoading = MutableLiveData(false)
 
     fun loadCategoriesAndFetchPhotos() {
         val userId = auth.currentUser?.uid ?: return
-        val categoriesRef = firestore.collection("users").document(userId).collection("categories")
-
+        val categoriesRef =
+            firestore.collection(Constants.USERS).document(userId).collection(Constants.CATEGORIES)
+        isLoading.value = true
         viewModelScope.launch {
-            val documents = categoriesRef.get().await()
-            val selectedCategories = documents.mapNotNull { document ->
-                val name = document.getString("name")
-                val id = document.getLong("id")?.toInt()
-                val drawableRes = R.drawable.ic_launcher_background
-                if (name != null && id != null) {
-                    Category(id, name, drawableRes, queryParam = name)
-                } else {
-                    null
-                }
-            }.take(3)
+            try {
+                val documents = categoriesRef.get().await()
+                val selectedCategories = documents.mapNotNull { document ->
+                    val name = document.getString(Constants.NAME)
+                    val id = document.getLong(Constants.ID)?.toInt()
+                    val drawableRes = R.drawable.ic_launcher_background
+                    if (name != null && id != null) {
+                        Category(id, name, drawableRes, queryParam = name)
+                    } else {
+                        null
+                    }
+                }.take(3)
 
-            fetchPhotosForSelectedCategories(selectedCategories)
+                fetchPhotosForSelectedCategories(selectedCategories)
+
+            } finally {
+                isLoading.value = false
+            }
         }
     }
 

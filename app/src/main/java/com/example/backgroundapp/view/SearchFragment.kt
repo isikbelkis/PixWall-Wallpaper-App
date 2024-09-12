@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.backgroundapp.R
 import com.example.backgroundapp.adapter.PhotoAdapter
 import com.example.backgroundapp.databinding.FragmentSearchBinding
 import com.example.backgroundapp.viewmodel.SearchViewModel
@@ -24,6 +24,11 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         binding.searchRecycler.layoutManager = layoutManager
@@ -38,6 +43,10 @@ class SearchFragment : Fragment() {
 
         searchViewModel.searchResultsLiveData.observe(viewLifecycleOwner) { photos ->
             adapter.updatePhotos(photos)
+        }
+
+        searchViewModel.isLoading.observe(viewLifecycleOwner) { loading ->
+            binding.progressBar.isVisible = loading
         }
 
         searchViewModel.searchQueryLiveData.observe(viewLifecycleOwner) { query ->
@@ -56,7 +65,5 @@ class SearchFragment : Fragment() {
                 return false
             }
         })
-
-        return binding.root
     }
 }

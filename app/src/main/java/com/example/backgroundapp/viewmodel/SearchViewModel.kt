@@ -1,7 +1,6 @@
 package com.example.backgroundapp.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -22,7 +21,10 @@ class SearchViewModel(
     private val searchQuery = MutableLiveData<String>()
     val searchQueryLiveData: LiveData<String> get() = searchQuery
 
+    val isLoading = MutableLiveData(false)
+
     fun searchPhotos(query: String) {
+        isLoading.value = true
         viewModelScope.launch {
             if (query.isNotEmpty()) {
                 try {
@@ -41,6 +43,9 @@ class SearchViewModel(
                     }
                 } catch (e: Exception) {
                     searchResults.postValue(emptyList())
+                }
+                finally {
+                    isLoading.value = false
                 }
                 searchQuery.postValue(query)
             }

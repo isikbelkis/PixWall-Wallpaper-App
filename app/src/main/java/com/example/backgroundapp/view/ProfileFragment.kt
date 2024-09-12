@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.backgroundapp.R
@@ -26,21 +27,17 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        val layoutManager = GridLayoutManager(context, 2)
-        binding.recyclerSave.layoutManager = layoutManager
+        setupRecyclerView()
+        setupAdapter()
 
-        adapter = PhotoAdapter(
-            emptyList(),
-            onClick = { photo ->
-                val action =
-                    ProfileFragmentDirections.actionProfileFragment2ToDetailFragment2(id = photo.id!!)
-                findNavController().navigate(action)
-            }
-        )
-        binding.recyclerSave.adapter = adapter
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         profileViewModel.getUserData()
         profileViewModel.getSavedPhotos()
@@ -70,7 +67,25 @@ class ProfileFragment : Fragment() {
             bottomSheetLogout()
         }
 
-        return binding.root
+        profileViewModel.isLoading.observe(viewLifecycleOwner) { loading ->
+            binding.progressBar.isVisible = loading
+        }
+    }
+
+    private fun setupRecyclerView() {
+        val layoutManager = GridLayoutManager(context, 2)
+        binding.recyclerSave.layoutManager = layoutManager
+    }
+
+    private fun setupAdapter() {
+        adapter = PhotoAdapter(
+            emptyList(),
+            onClick = { photo ->
+                val action = ProfileFragmentDirections.actionProfileFragment2ToDetailFragment2(id = photo.id!!)
+                findNavController().navigate(action)
+            }
+        )
+        binding.recyclerSave.adapter = adapter
     }
 
     private fun bottomSheetLogout() {
@@ -92,7 +107,6 @@ class ProfileFragment : Fragment() {
 
                     true
                 }
-
                 else -> false
             }
         }
