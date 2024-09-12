@@ -1,11 +1,12 @@
 package com.example.backgroundapp.view
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.example.backgroundapp.R
 import com.example.backgroundapp.databinding.ActivityBattomNavBinding
+import com.example.backgroundapp.util.hide
+import com.example.backgroundapp.util.show
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
 
 class BottomNavActivity : AppCompatActivity() {
@@ -31,18 +32,11 @@ class BottomNavActivity : AppCompatActivity() {
         }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.detailFragment -> hideBottomNav()
-                else -> showBottomNav()
+            if (destination.id == R.id.detailFragment) {
+                binding.navView.hide()
+            } else {
+                binding.navView.show()
             }
         }
-    }
-
-    private fun hideBottomNav() {
-        binding.navView.visibility = View.GONE
-    }
-
-    private fun showBottomNav() {
-        binding.navView.visibility = View.VISIBLE
     }
 }

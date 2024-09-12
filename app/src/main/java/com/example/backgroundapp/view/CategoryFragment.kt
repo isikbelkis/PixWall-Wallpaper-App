@@ -12,6 +12,7 @@ import com.example.backgroundapp.R
 import com.example.backgroundapp.adapter.CategoryAdapter
 import com.example.backgroundapp.databinding.FragmentCategoryBinding
 import com.example.backgroundapp.model.Category
+import com.example.backgroundapp.model.CategoryData
 import com.example.backgroundapp.viewmodel.CategoryViewModel
 import org.koin.android.ext.android.inject
 
@@ -35,80 +36,7 @@ class CategoryFragment : Fragment() {
             findNavController().navigate(action)
         }
 
-        val categories = listOf(
-            Category(
-                id = 1,
-                name = getString(R.string.animals),
-                imageResId = R.drawable.animals,
-                queryParam = "animals"
-            ),
-            Category(
-                id = 2,
-                name = getString(R.string.film),
-                imageResId = R.drawable.film,
-                queryParam = "film"
-            ),
-            Category(
-                id = 3,
-                name = getString(R.string.nature),
-                imageResId = R.drawable.nature,
-                queryParam = "nature"
-            ),
-            Category(
-                id = 4,
-                name = getString(R.string.travel),
-                imageResId = R.drawable.travel,
-                queryParam = "travel"
-            ),
-            Category(
-                id = 5,
-                name = getString(R.string.people),
-                imageResId = R.drawable.people,
-                queryParam = "people"
-            ),
-            Category(
-                id = 6,
-                name = getString(R.string.architecture),
-                imageResId = R.drawable.architecture_interiors,
-                queryParam = "architecture_interiors"
-            ),
-            Category(
-                id = 7,
-                name = getString(R.string.food_drink),
-                imageResId = R.drawable.food_drink,
-                queryParam = "food_drink"
-            ),
-            Category(
-                id = 8,
-                name = getString(R.string.textures_patterns),
-                imageResId = R.drawable.textures_patterns,
-                queryParam = "textures_patterns"
-            ),
-            Category(
-                id = 9,
-                name = getString(R.string.experimental),
-                imageResId = R.drawable.experimental,
-                queryParam = "experimental"
-            ),
-            Category(
-                id = 10,
-                name = getString(R.string.photography),
-                imageResId = R.drawable.streeth_photography,
-                queryParam = "streeth_photography"
-            ),
-            Category(
-                id = 11,
-                name = getString(R.string.sports),
-                imageResId = R.drawable.sports,
-                queryParam = "sports"
-            ),
-            Category(
-                id = 12,
-                name = getString(R.string.d),
-                imageResId = R.drawable.dddd,
-                queryParam = "3d"
-            )
-        )
+        val categories = CategoryData.categories
 
         adapter = CategoryAdapter(categories) { category ->
             if (category.isSelected) {

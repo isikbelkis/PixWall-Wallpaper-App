@@ -61,7 +61,6 @@ class DetailFragment : Fragment() {
         with(binding) {
             detailViewModel.imageResponse.observe(viewLifecycleOwner) { image ->
                 if (image != null) {
-                    Log.d("DetailFragment", "Image loaded: ${image.urls?.full}")
                     image.urls?.full?.let { url ->
                         backgroundImageView.loadImage(url)
                         imageUrl = url
@@ -72,8 +71,6 @@ class DetailFragment : Fragment() {
                     textName.text = image.user?.name.orEmpty()
                     textLike.text = image.likes?.toString().orEmpty()
                     detailViewModel.checkIfPhotoIsSaved(image.urls?.full.orEmpty())
-                } else {
-                    Log.e("DetailFragment", "Image is null or not loaded properly")
                 }
             }
             detailViewModel.isPhotoSavedLiveData.observe(viewLifecycleOwner) { isSaved ->

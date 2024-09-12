@@ -1,5 +1,6 @@
 package com.example.backgroundapp.util
 
+import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -23,5 +24,13 @@ fun ImageView.loadCircleImage(path: String) {
         .load(path)
         .apply(requestOptions)
         .into(this)
+}
+
+fun View.hide() {
+    this.visibility = View.GONE
+}
+
+fun View.show() {
+    this.visibility = View.VISIBLE
 }
 
