@@ -9,7 +9,9 @@
     <dimen name="dimen20sp">20sp</dimen>
     <dimen name="dimen25sp">25sp</dimen>
     <dimen name="dimen34sp">30sp</dimen>
+    <dimen name="dimen40sp">40sp</dimen>
     <dimen name="dimen50sp">50sp</dimen>
+    <dimen name="dimen55sp">55sp</dimen>
     <dimen name="dimen30sp">30sp</dimen>
 
     <dimen name="dimen5">5dp</dimen>
@@ -35,5 +37,7 @@
 
     <dimen name="dimen300">300dp</dimen>
     <dimen name="dimen250">250dp</dimen>
+    <dimen name="dimen100">100dp</dimen>
     <dimen name="dimen380">380dp</dimen>
+    <dimen name="dimen400">400dp</dimen>
 </resources>

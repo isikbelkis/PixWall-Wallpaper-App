@@ -18,7 +18,7 @@
                 android:centerColor="@android:color/transparent"
                 android:endColor="@android:color/transparent"
                 android:type="radial"
-                android:gradientRadius="2000"
+                android:gradientRadius="1000"
                 android:centerX="0.1"
                 android:centerY="0.6"/>
             <corners android:radius="16dp"/>

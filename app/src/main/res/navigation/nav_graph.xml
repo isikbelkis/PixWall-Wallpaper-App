@@ -3,17 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/introFragment">
+    app:startDestination="@id/onboardingFragment">
 
-    <fragment
-        android:id="@+id/introFragment"
-        android:name="com.example.backgroundapp.view.IntroFragment"
-        android:label="fragment_intro"
-        tools:layout="@layout/fragment_intro">
-        <action
-            android:id="@+id/action_introFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.backgroundapp.view.LoginFragment"
@@ -51,4 +42,15 @@
         android:id="@+id/battomNavActivity"
         android:name="com.example.backgroundapp.view.BottomNavActivity"
         android:label="BattomNavActivity" />
+    <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="com.example.backgroundapp.view.OnboardingFragment"
+        android:label="OnboardingFragment" >
+        <action
+            android:id="@+id/action_onboardingFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_onboardingFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+    </fragment>
 </navigation>

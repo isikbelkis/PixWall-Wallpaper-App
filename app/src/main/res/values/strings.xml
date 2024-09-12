@@ -37,5 +37,20 @@
     <string name="logout">Log out</string>
     <string name="password_text">Password</string>
     <string name="categories3">You can choose up to 3 categories</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
 
+    <string name="onboarding1Text">Welcome</string>
+    <string name="onboarding1pix">Pix</string>
+    <string name="onboarding1Wall">Wall</string>
+    <string name="onboardingText2">Discover our vast collection of your favorite themes and add style to your device</string>
+    <string name="onboarding2Text1">Download</string>
+    <string name="onboarding2Textand">and</string>
+    <string name="onboarding2Text2">Set Up Easily</string>
+    <string name="onboarding2Text3">Download your chosen wallpaper with a single tap and set it as your background instantly. Enjoy your fresh new look</string>
+    <string name="onboarding3Text1">Add</string>
+    <string name="onboarding3Text2">Personal </string>
 </resources>

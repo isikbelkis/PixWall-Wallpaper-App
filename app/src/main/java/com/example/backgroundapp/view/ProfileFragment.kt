@@ -78,7 +78,7 @@ class ProfileFragment : Fragment() {
         val view = layoutInflater.inflate(R.layout.bottom_logout, null)
         bottomSheetDialog.setContentView(view)
 
-        val menu = view.findViewById<NavigationView>(R.id.bottomNavLogout)
+        val menu = view.findViewById<NavigationView>(R.id.bottomNavOnboarding)
         menu.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.logout -> {

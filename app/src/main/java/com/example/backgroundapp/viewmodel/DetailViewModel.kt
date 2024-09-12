@@ -41,7 +41,8 @@ class DetailViewModel(
                 val photoData = hashMapOf(
                     "id" to photoItem.id,
                     "url" to photoItem.urls?.full,
-                    "user" to photoItem.user?.name
+                    "user" to photoItem.user?.name,
+                    "profile_image" to photoItem.user?.profileImage?.small
                 )
                 photoRef.document(photoItem.id!!).set(photoData).await()
                 Log.d("DetailViewModel", "kaydedildi.")

@@ -61,19 +61,19 @@ class ProfileViewModel(
             val snapshot = photoRef.get().await()
             val photos = snapshot.documents.map { doc ->
                 PhotoItem(
-                    id = doc.getString("id"),
-                    description = doc.getString("description"),
-                    likes = doc.getLong("likes")?.toInt(),
+                    id = doc.getString("id") ?: "Unknown ID",
+                    description = "",
+                    likes = 0,
                     urls = PhotoItem.Urls(
-                        full = doc.getString("url_full"),
-                        regular = doc.getString("url_regular"),
+                        full = doc.getString("url") ?: "",
+                        regular = ""
                     ),
                     user = PhotoItem.User(
-                        name = doc.getString("user_name"),
-                        lastName = doc.getString("user_last_name"),
-                        id = doc.getString("user_id"),
+                        name = doc.getString("user") ?: "Unknown User",
+                        lastName = "",
+                        id = "",
                         profileImage = PhotoItem.User.ProfileImage(
-                            small = doc.getString("user_profile_image_small")
+                            small = doc.getString("profile_image") ?: ""
                         )
                     )
                 )
