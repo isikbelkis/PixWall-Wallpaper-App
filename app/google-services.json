@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "666287459960",
+    "project_id": "background-app-e02bc",
+    "storage_bucket": "background-app-e02bc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666287459960:android:967dcd8bc086fe814a678d",
+        "android_client_info": {
+          "package_name": "com.example.backgroundapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCq1Z2Pmsh08BNYRA3c_ohO-R_FLwga6iI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
