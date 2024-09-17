@@ -31,6 +31,5 @@ OkHttp, Gson, ViewPager2, Chip Navigation Bar, BlurView
 
 ## UI Tasarım
 
-| List            | Detail                                                               |
 | ----------------- | ------------------------------------------------------------------ |
-| <img src="./img/Light-List.png" width="50%" height="50%">  | <img src="./img/Light-Detail.png" width="50%" height="50%"> |
+| <img src="./img/1.png" width="50%" height="50%">  | <img src="./img/2.png" width="50%" height="50%"> |
