@@ -1,51 +1,33 @@
-## Pix Wall - Wallpaper Uygulaması
-Pix Wall, Unsplash API kullanarak yüksek kaliteli duvar kağıtlarını listeleyen ve kullanıcıların bu resimlere detaylı olarak erişebilmesini sağlayan bir mobil uygulamadır. 
-Kullanıcılar listelenen resimlere tıklayarak detay sayfasına yönlendirilir. Detay sayfasında, kullanıcılar resmi kaydedebilir, indirebilir veya cihazlarının arka planı olarak ayarlayabilirler.
+## Pix Wall - Wallpaper Application
+Pix Wall is a mobile application that uses the Unsplash API to list high-quality wallpapers and allows users to access detailed information about these images. Users are directed to the detail page by clicking on a listed image. On the detail page, users can save, download, or set the image as their device's background.
 
-## Kullanılan Teknolojiler
-1-Unsplash API: Yüksek kaliteli görselleri listelemek ve detayları almak için kullanıldı.
+## Technologies Used
+1-Unsplash API: Used to list high-quality images and retrieve their details.
+2-Firebase: Used for user authentication and storing data in Firestore.
+3-Firestore: Used to store user data, favorites, and selected categories.
+4-ViewPager2: Used for navigating between pages within the app.
+5-Chip Navigation Bar: A library from GitHub used for quick access to categories.
+6-Retrofit: Used to perform network requests with the API.
+7-Glide: Used for fast and efficient image loading.
+8-Navigation Component: Used for fragment transitions and data passing.
+9-Coroutines: Used to perform asynchronous operations without blocking the UI thread.
+10-Wallpaper Manager: Allows users to directly set an image as their device's background.
+11-Download Manager: Allows users to download and save the image from the detail page to their device.
+12-Firebase Authentication: Used for user login.
+13-Firestore: Used to store users' selected categories and favorites.
 
-2-Firebase: Kullanıcı kimlik doğrulama ve verilerin Firestore'a kaydedilmesi için kullanıldı.
+## Application Features
+-Listing and Detail Page: On the main screen, wallpapers fetched from the Unsplash API are listed. When any image is clicked, it transitions to the detail page.
+-Save and Download: Users can save the image displayed on the detail page to their device or download it using the Download Manager.
+-Set as Background: With Wallpaper Manager, users can set the image as their device's background with one click.
+-User Login and Categories: After logging in, users can select categories. These categories are stored in Firestore and listed on the main page. Content is displayed based on the categories selected by the user.
+-Profile Page: The data saved by the user is shown on the profile page.
+-Asynchronous Data Management: The app manages data from the API efficiently and performantly with Koin and Coroutines.
 
-3-Firestore: Kullanıcı verilerini, favorileri ve seçilen kategorileri saklamak için kullanıldı.
-
-4-ViewPager2: Uygulama içindeki sayfalar arasında geçiş yapmak için kullanıldı.
-
-5-Chip Navigation Bar: Kategorilere hızlı erişim sağlamak için GitHub'dan çekilen kütüphane kullanıldı.
-
-6-Retrofit: API ile network isteklerini gerçekleştirmek için kullanıldı.
-
-7-Glide: Görsellerin hızlı ve verimli bir şekilde yüklenmesi için kullanıldı.
-
-8-Navigation Component: Fragmentlar arası geçiş ve veri iletimi sağlamak için kullanıldı.
-
-9-Coroutines: Asenkron işlemleri UI thread'ini kilitlemeden gerçekleştirmek için kullanıldı.
-
-10-Wallpaper Manager: Kullanıcıların bir resmi doğrudan cihazlarının arka planı olarak ayarlayabilmesi için kullanıldı.
-
-11-Download Manager: Kullanıcıların detay sayfasında resmi indirip cihazlarına kaydedebilmeleri için kullanıldı.
-
-12-Firebase Authentication: Kullanıcı giriş işlemleri için kullanıldı.
-
-13-Firestore: Kullanıcıların seçtiği kategorileri ve favorileri saklamak için kullanıldı.
-
-## Uygulama Özellikleri
--Listeleme ve Detay Sayfası: Ana ekranda, Unsplash API’dan çekilen duvar kağıtları listelenir. Herhangi bir resme tıklanıldığında detay sayfasına geçilir.
-
--Kaydetme ve İndirme: Kullanıcılar, detay sayfasında görüntülenen resmi cihazlarına kaydedebilir veya Download Manager kullanarak indirebilirler.
-
--Arka Plan Yapma: Wallpaper Manager sayesinde, kullanıcılar bir tıklamayla resmi doğrudan cihazlarının arka planı olarak ayarlayabilirler.
-
--Kullanıcı Girişi ve Kategoriler: Kullanıcılar giriş yaptıktan sonra, kategorileri seçebilirler. Bu kategoriler Firestore'da saklanır ve ana sayfada listelenir. Kullanıcının seçtiği kategorilere göre içerikler görüntülenir.
-
--Profil Sayfası: Kullanıcının kaydettiği veriler, profil sayfasında gösterilir.
-
--Asenkron Veri Yönetimi: Uygulama, API'dan gelen verileri verimli ve performanslı bir şekilde işlemek için Koin ve Coroutines ile asenkron veri yönetimi sağlar.
-
-## Kütüphaneler
+## Libraries
 Firebase, Retrofit, Glide, Koin, Navigation Component, Coroutines
 OkHttp, Gson, ViewPager2, Chip Navigation Bar, BlurView
 
-## UI Tasarım
+## UI 
 
 <img src="./Img/1.png" width="50%" height="50%">   <img src="./Img/2.png" width="50%" height="50%"> 
